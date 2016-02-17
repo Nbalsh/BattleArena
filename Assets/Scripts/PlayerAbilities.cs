@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerAbilities : MonoBehaviour {
 
     ProgressBar progressBar;
-
+    PlayerSetup.PlayerEnum player;
 	// Use this for initialization
 	void Start () {
-        progressBar = GameObject.FindObjectOfType(typeof(ProgressBar)) as ProgressBar;
+       
 	}
 	
 	// Update is called once per frame
@@ -17,4 +18,17 @@ public class PlayerAbilities : MonoBehaviour {
             progressBar.ActivateProgressBar();
         }
 	}
+
+    public void PlayerAbilitiesSetUp(PlayerSetup playerSetup)
+    {
+        ProgressBar[] progressBars = GameObject.FindObjectsOfType<ProgressBar>();
+        player = playerSetup.playerNum;
+        for (var i = 0; i < 4; i++)
+        {
+            if (progressBars[i].player == player)
+            {
+                progressBar = progressBars[i];
+            }
+        }
+    }
 }
